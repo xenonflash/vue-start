@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Document</title>
+</head>
+<body>
+  <div id="app">{{msg}}</div>
+  <hr>
+  <div id="app2">
+    <span v-bind:title="message">鼠标悬停几秒钟查看次数的动态绑定的提示信息</span>
+  </div>
+  <hr>
+  <button v-on:click="toggle()">toggle</button>
+  <div id="app3" v-if="show">现在你看到我了</div>
+  <hr>
+  <div id="app4">
+    <button v-on:click="add()">随机添加个东西</button>
+    <ol>
+      <li v-for="todo in todos">{{todo.text}}</li>
+    </ol>
+  </div>
+  <hr>
+  <div id="app5">
+    <p>{{msg}}</p>
+    <button v-on:click="reverse">逆转消息</button>
+  </div>
+  <hr>
+  <div id="app6">
+    <input type="text" v-model="msg">
+    <p>{{msg}}</p>
+  </div>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script>
+  var app = new Vue({
+    el: "#app",
+    data: {
+      msg: "hello world",
+    }
+  });
+  var app2 = new Vue({
+    el: '#app2',
+    data: {
+      message: "页面加载于 " + new Date(),
+    },
+  });
+  var app3 = new Vue({
+    el: '#app3',
+    data: {
+      show: true,
+    },
+    methods: {
+      toggle: function() {
+        this.show = !this.show;
+      },
+    }
+  });
+  var app4 = new Vue({
+    el: '#app4',
+    data: {
+      todos: [
+        {text: "好好学习"},
+        {text: "天天向上"},
+        {text: "报效祖国"},
+        {text: "死而受益"},
+      ],
+    },
+    methods: {
+      add: function() {
+        this.todos.push({text: Math.random().toString()});
+      }
+    },
+  });
+  var app5 = new Vue({
+    el: '#app5',
+    data: {
+      msg: '我爱北京天安门',
+    },
+    methods: {
+      reverse: function() {
+        this.msg = this.msg.split('').reverse().join('');
+      },
+    },
+  });
+  var app6 = new Vue({
+    el: '#app6',
+    data: {
+      msg: 'hello',
+    },
+  });
+</script>
+</body>
+
+</html>
